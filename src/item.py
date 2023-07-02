@@ -1,8 +1,10 @@
+import csv
+
 class Item:
     """
     Класс для представления товара в магазине.
     """
-    pay_rate = 1.0
+    pay_rate = 0.8
     all = []
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
@@ -13,7 +15,23 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        pass
+        self.__name = name
+        self.price = price
+        self.quantity = quantity
+        self.all.append(self)
+
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, new_name):
+        if len(new_name) > 10:
+            self.__name = new_name[:10]
+        else:
+            self.__name = new_name
+
+
 
     def calculate_total_price(self) -> float:
         """
@@ -21,10 +39,27 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        pass
+        return self.price * self.quantity
 
     def apply_discount(self) -> None:
         """
         Применяет установленную скидку для конкретного товара.
         """
-        pass
+        self.price *= self.pay_rate
+
+    @classmethod
+    def instantiate_from_csv(cls, csv_file):
+        with open(csv_file, 'r', encoding='windows-1251') as file:
+            reading_csv = csv.DictReader(file, delimiter=',')
+            for i in reading_csv:
+                name = str(i['name'])
+                price = float(i['price'])
+                quantity = int(i['quantity'])
+                cls(name, price, quantity)
+
+    @staticmethod
+    def string_to_number(string):
+        string = int(float(string))
+        return string
+
+

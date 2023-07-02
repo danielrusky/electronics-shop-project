@@ -1,5 +1,7 @@
 from src.item import Item
 
+CSV_FILE = '../src/items.csv'
+
 if __name__ == '__main__':
     item = Item('Телефон', 10000, 5)
 
@@ -11,10 +13,10 @@ if __name__ == '__main__':
     item.name = 'СуперСмартфон'
     # Exception: Длина наименования товара превышает 10 символов.
 
-    Item.instantiate_from_csv()  # создание объектов из данных файла
-    assert len(Item.all) == 5  # в файле 5 записей с данными по товарам
+    Item.instantiate_from_csv(CSV_FILE)  # создание объектов из данных файла
+    assert len(Item.all) == 6  # в файле 5 записей с данными по товарам
 
-    item1 = Item.all[0]
+    item1 = Item.all[1]
     assert item1.name == 'Смартфон'
 
     assert Item.string_to_number('5') == 5

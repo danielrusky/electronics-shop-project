@@ -19,3 +19,4 @@ class Phone(Item):
         if number_of_sim <= 0:
             raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля")
         self._number_of_sim = number_of_sim
+#

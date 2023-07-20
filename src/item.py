@@ -1,5 +1,6 @@
 import csv
 
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -15,6 +16,7 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
+        super().__init__()
         self.__name = name
         self.price = price
         self.quantity = quantity
@@ -30,8 +32,6 @@ class Item:
             self.__name = new_name[:10]
         else:
             self.__name = new_name
-
-
 
     def calculate_total_price(self) -> float:
         """
@@ -61,5 +61,3 @@ class Item:
     def string_to_number(string):
         string = int(float(string))
         return string
-
-

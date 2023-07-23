@@ -1,7 +1,13 @@
 import csv
 
+import pytest
+
 
 class Item:
+    @pytest.fixture
+    def example(self):
+        Item.pay_rate = 0.8
+        return Item("Смартфон", 10000, 20)
     """
     Класс для представления товара в магазине.
     """
@@ -32,6 +38,8 @@ class Item:
         if not isinstance(other, Item):
             raise ValueError('Складывать можно только объекты Item и дочерние от них')
         return self.quantity + other.quantity
+
+
 
     @property
     def name(self):

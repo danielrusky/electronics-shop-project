@@ -2,9 +2,11 @@ import csv
 
 import pytest
 
-
+class InstantiateCSVError(Exception):
+    def __init__(self, message=" Файл item.csv поврежден "):
+        super().__init__(message)
+        
 class Item:
-
     """
     Класс для представления товара в магазине.
     """
@@ -60,21 +62,26 @@ class Item:
         """
         self.price *= self.pay_rate
 
-    def instantiate_from_csv(self):
-        pass
-
-    def InstantiateCSVError(self):
-        pass
 
     @classmethod
-    def instantiate_from_csv(cls, csv_file):
-        with open(csv_file, 'r', encoding='windows-1251') as file:
-            reading_csv = csv.DictReader(file, delimiter=',')
-            for i in reading_csv:
-                name = str(i['name'])
-                price = float(i['price'])
-                quantity = int(i['quantity'])
-                cls(name, price, quantity)
+    def instantiate_from_csv(cls, csv_file="../src/items.csv"):
+        try:
+            with open(csv_file, 'r', encoding='windows-1251') as file:
+                
+                reading_csv = csv.DictReader(file, delimiter=',')
+                for i in reading_csv:
+                    next(reading_csv)
+                    if len(i) != 3:
+                        raise InstantiateCSVError
+                    name = str(i['name'])
+                    price = float(i['price'])
+                    quantity = int(i['quantity'])
+                    cls(name, price, quantity)
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
+        
+            
+            
 
     @staticmethod
     def string_to_number(string):

@@ -2,6 +2,7 @@
 import pytest
 
 from src.item import Item
+from src.keyboard import Keyboard
 
 
 @pytest.fixture
@@ -52,5 +53,15 @@ def test_add(example):
     item2 = Item("Ноутбук", 20000, 5)
 
     assert item1 + item2 == 25
+
+
+def test_keyboard():
+    kb = Keyboard('Dark Project KD87A', 9600, 5)
+    assert str(kb) == "Dark Project KD87A"
+    assert str(kb.language) == "EN"
+    assert kb.name == 'Dark Project KD87A'
+    assert kb.price == 9600
+    assert kb.quantity == 5
+
 
 ##

@@ -3,6 +3,13 @@ import pytest
 
 from src.item import Item
 
+
+@pytest.fixture
+def example():
+    Item.pay_rate = 0.8
+    return Item("Смартфон", 10000, 20)
+
+
 def test_calculate_total_prices():
     item1 = Item("Смартфон", 10000, 20)
     item2 = Item("Ноутбук", 20000, 5)
@@ -38,4 +45,12 @@ def test_repr(example):
 
 def test_str(example):
     assert example.__str__() == "Смартфон"
+
+
+def test_add(example):
+    item1 = Item("Смартфон", 10000, 20)
+    item2 = Item("Ноутбук", 20000, 5)
+
+    assert item1 + item2 == 25
+
 ##

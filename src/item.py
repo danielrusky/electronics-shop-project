@@ -4,10 +4,7 @@ import pytest
 
 
 class Item:
-    @pytest.fixture
-    def example(self):
-        Item.pay_rate = 0.8
-        return Item("Смартфон", 10000, 20)
+
     """
     Класс для представления товара в магазине.
     """
@@ -39,8 +36,6 @@ class Item:
             raise ValueError('Складывать можно только объекты Item и дочерние от них')
         return self.quantity + other.quantity
 
-
-
     @property
     def name(self):
         return self.__name
@@ -65,6 +60,12 @@ class Item:
         """
         self.price *= self.pay_rate
 
+    def instantiate_from_csv(self):
+        pass
+
+    def InstantiateCSVError(self):
+        pass
+
     @classmethod
     def instantiate_from_csv(cls, csv_file):
         with open(csv_file, 'r', encoding='windows-1251') as file:
@@ -79,3 +80,4 @@ class Item:
     def string_to_number(string):
         string = int(float(string))
         return string
+#

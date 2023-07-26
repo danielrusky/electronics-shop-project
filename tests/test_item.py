@@ -63,5 +63,11 @@ def test_keyboard():
     assert kb.price == 9600
     assert kb.quantity == 5
 
+def test_instantiate_from_csv(csv_file):
+    item1 = Item("Смартфон", 10000, 20)
+    with open(csv_file, 'r', encoding='windows-1251') as file:
+        assert item1.name == "Смартфон"
+        assert item1.price == 10000
+        assert item1.quantity == 20
 
 ###
